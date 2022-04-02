@@ -1,11 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Provider Details</h1>
 
 <%= render "form", provider_detail: @provider_detail %>
 
 <br>
 
-<div>
-  <%= link_to "Back to provider details", provider_details_path %>
-</div>
+<p style="color: green"><%= notice %></p>
+
+<div id="provider_details">
+
+
+
+<table>                         
+<tr>                          
+<th>Provider NPI</th>
+<th>Provider Name</th>
+<th>Provider Address</th>
+<th>Provider Taxonomy</th>
+<th>Provider Type</th>
+</tr>
+<% @provider_details.each do |provider_detail| %>    
+  <tr>
+  <td><%= provider_detail.npi %></td> 
+  <td><%= provider_detail.name %></td>  
+  <td><%= provider_detail.address %></td>  
+  <td><%= provider_detail.taxonomy %></td>  
+  <td><%= provider_detail.provider_type %></td>  
+  </tr>
+  <% end %>                       
+  </table>  
+  
+  </div>

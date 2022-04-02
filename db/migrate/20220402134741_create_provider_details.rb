@@ -4,7 +4,7 @@ class CreateProviderDetails < ActiveRecord::Migration[7.0]
       t.string :npi
       t.string :name
       t.string :address
-      t.string :type
+      t.string :provider_type
       t.string :taxonomy
 
       t.timestamps

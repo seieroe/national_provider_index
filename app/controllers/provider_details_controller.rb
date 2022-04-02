@@ -26,15 +26,18 @@ class ProviderDetailsController < ApplicationController
     api_response = Faraday.get 'https://npiregistry.cms.hhs.gov/api/?version=2.0&number=1255985933' 
     
     parsed_api_response = JSON.parse api_response.body
+    @npi = parsed_api_response['results'][0]['number']
     @name = parsed_api_response['results'][0]['basic']['name']
-    
+    @address = parsed_api_response['results'][0]['addresses'][0]['address_1'] + " " + parsed_api_response['results'][0]['addresses'][0]['address_2'] + " " + parsed_api_response['results'][0]['addresses'][0]['city'] + " " + parsed_api_response['results'][0]['addresses'][0]['state'] + " " + parsed_api_response['results'][0]['addresses'][0]['postal_code']
+    @provider_type = parsed_api_response['results'][0]['enumeration_type']
+    @taxonomy = parsed_api_response['results'][0]['taxonomies'][0]['desc']
     # if ProviderDetail.exists?
     #   @provider_detail = ProviderDetail.update(provider_detail_params)
     # else
-      @provider_detail = ProviderDetail.create(name: @name)
+    @provider_detail = ProviderDetail.create(name: @name, npi: @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
     # end
-
-    # raise @provider_detail.inspect
+    redirect_to '/index'
+    # raise parsed_api_response['results'][0]['addresses'][0]['address_1'].inspect
 
     # respond_to do |format|
     #   if @provider_detail.save

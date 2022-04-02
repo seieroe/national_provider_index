@@ -1,27 +1,31 @@
 <div id="<%= dom_id provider_detail %>">
   <p>
-    <strong>Enter the NPI:</strong>
+    <strong>Provider NPI:</strong>
     <%= provider_detail.npi %>
   </p>
 
   <p>
-    <strong>Name:</strong>
+    <strong>Provider Name:</strong>
     <%= provider_detail.name %>
   </p>
 
   <p>
-    <strong>Address:</strong>
+    <strong>Provider Address:</strong>
     <%= provider_detail.address %>
   </p>
 
   <p>
-    <strong>Type:</strong>
-    <%= provider_detail.type %>
+    <strong>Provider Type:</strong>
+    <%= provider_detail.provider_type %>
   </p>
 
   <p>
-    <strong>Taxonomy:</strong>
+    <strong>Provider Taxonomy:</strong>
     <%= provider_detail.taxonomy %>
   </p>
+  <p>
+  <strong>Updated:</strong>
+  <%= provider_detail.updated_at %>
+</p>
 
 </div>
