@@ -1,0 +1,23 @@
+<%= form_with(model: provider_detail) do |form| %>
+  <div>
+    <%= form.text_field :npi, :label => "NPI"%>
+  </div>
+
+
+  <div>
+    <%= form.submit("Find the NPI") %>
+  </div>
+  
+  <% if provider_detail.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(provider_detail.errors.count, "error") %> prohibited this provider_detail from being saved:</h2>
+
+      <ul>
+        <% provider_detail.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>
