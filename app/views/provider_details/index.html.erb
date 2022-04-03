@@ -1,19 +1,18 @@
-<h1>Provider Details</h1>
+<h1 class="title">Provider Details</h1>
+<h2 class="description"> Enter the National Provider Index (NPI) in the field below to find the provider details </h2> 
 
 <%= render "form", provider_detail: @provider_detail %>
 
 <br>
 
-<p style="color: green"><%= notice %></p>
-
-<div id="provider_details">
+<div class="details-table">
 
   <table>                         
     <tr>                          
       <th>Provider NPI</th>
-      <th>Provider Name</th>
-      <th>Provider Address</th>
-      <th>Provider Taxonomy</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Taxonomy</th>
       <th>Provider Type</th>
     </tr>
     <% @provider_details.each do |provider_detail| %>    
@@ -23,8 +22,8 @@
         <td><%= provider_detail.address %></td>  
         <td><%= provider_detail.taxonomy %></td>  
         <td><%= provider_detail.provider_type %></td> 
-      </tr>
-    <% end %>                       
+        </tr>
+        <% end %>                       
   </table>  
   
 </div>

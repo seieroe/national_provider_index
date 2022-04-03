@@ -1,3 +1,73 @@
+/* <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> */
+/* <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+
+html {
+
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    background-color: #0D2837;
+    color: white;
+}
+
+.title {
+    font-size: 4em;
+}
+
+.description {
+    font-family: Source Sans Pro';
+}
+
+
+table, th, td {
+	border: 1px black solid;
+    width: 75%;
+    text-align: center;
+    background-color: white;
+    color: black;
+    /* border-collapse: collapse; */
+}
+
+table {
+    padding: 12px 20px;
+    margin: 8px 8px 8px 8px;
+}
+
+th {
+    font-size: 2em;
+    height: 75px;
+    color: #6A718A;
+}
+
+form { 
+    display: flex;
+    text-align: center;
+}
+
+.details-table {
+    background-color: blue;
+    width: 75%;
+    margin: 0 auto;
+
+}
+
+input[type=text] {
+    /* width: 100%; */
+    padding: 12px 20px;
+    margin: 8px 0;
+    /* box-sizing: border-box; */
+  }
+
+.submit-button {
+    display: flex; 
+    padding: 12px 20px;
+    margin: 8px 0; 
+    background-color: #91BB39; 
+}
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
