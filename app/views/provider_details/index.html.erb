@@ -17,6 +17,7 @@
 <th>Provider Address</th>
 <th>Provider Taxonomy</th>
 <th>Provider Type</th>
+<th>Update at</th>
 </tr>
 <% @provider_details.each do |provider_detail| %>    
   <tr>
@@ -24,7 +25,8 @@
   <td><%= provider_detail.name %></td>  
   <td><%= provider_detail.address %></td>  
   <td><%= provider_detail.taxonomy %></td>  
-  <td><%= provider_detail.provider_type %></td>  
+  <td><%= provider_detail.provider_type %></td> 
+  <td><%= provider_detail.updated_at %></td>   
   </tr>
   <% end %>                       
   </table>  
