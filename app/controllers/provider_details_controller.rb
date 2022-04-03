@@ -3,8 +3,9 @@ class ProviderDetailsController < ApplicationController
 
   # GET /provider_details or /provider_details.json
   def index
-    @provider_details = ProviderDetail.all
+    @provider_details = ProviderDetail.all.order(updated_at: :desc)
     @provider_detail = ProviderDetail.new
+
   end
 
   # GET /provider_details/1 or /provider_details/1.json
@@ -23,7 +24,7 @@ class ProviderDetailsController < ApplicationController
   # POST /provider_details or /provider_details.json
   def create
     #TODO: interpolate number
-    api_response = Faraday.get 'https://npiregistry.cms.hhs.gov/api/?version=2.0&number=1255985933' 
+    api_response = Faraday.get "https://npiregistry.cms.hhs.gov/api/?version=2.0&number=#{params['provider_detail']['npi']}"
     
     parsed_api_response = JSON.parse api_response.body
     @npi = parsed_api_response['results'][0]['number']
@@ -32,15 +33,17 @@ class ProviderDetailsController < ApplicationController
     @provider_type = parsed_api_response['results'][0]['enumeration_type']
     @taxonomy = parsed_api_response['results'][0]['taxonomies'][0]['desc']
     #TODO: interpolate number
-    if ProviderDetail.where(npi: '1255985933').present?
-      existing_record = ProviderDetail.where(npi: '1255985933')
-      @provider_detail = existing_record.update(ProviderDetail.where(npi: '1255985933')[0]['id'], name: @name, 'npi': 1255985933, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
+    if ProviderDetail.where(npi: params['provider_detail']['npi']).present?
+      existing_record = ProviderDetail.where(npi: params['provider_detail']['npi'])
+      @provider_detail = existing_record.update(existing_record[0]['id'], name: @name, 'npi': 1255985933, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
       @provider_detail.touch
     else
       @provider_detail = ProviderDetail.create(name: @name, npi: @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
     end
     redirect_to '/index'
-    # raise ProviderDetail.where(npi: '1255985933')[0]['id'].inspect
+    # raise params['provider_detail']['npi'].inspect
+
+    
 
     # respond_to do |format|
     #   if @provider_detail.save
