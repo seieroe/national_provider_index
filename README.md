@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Necessary steps to get the application up and running:
 
-Things you may want to cover:
+1) Clone this repository
+`git clone git@github.com:seieroe/national_provider_index.git`
 
-* Ruby version
+2) cd into the directory
+`cd national_provider_index`
 
-* System dependencies
+3) bundle install for gems 
+`bundle`
 
-* Configuration
+4) run the migrations to create table
+`rake db:migrate`
 
-* Database creation
+5) start your rails server
+`rails s`
 
-* Database initialization
 
-* How to run the test suite
+Things you may need to know:
 
-* Services (job queues, cache servers, search engines, etc.)
+* Ruby version: ruby "3.0.0"
 
-* Deployment instructions
+* System dependencies: SQLite
 
-* ...
+* Database initialization: `rake db:migrate`
+
