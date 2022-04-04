@@ -1,9 +1,15 @@
-<h1 class="title">Provider Details</h1>
-<h2 class="description"> Enter the National Provider Index (NPI) in the field below to find the provider details </h2> 
+<h1 class="title">National Provider Index Lookup</h1>
+<h2 class="description"> Enter the National Provider Index (NPI) below to find provider details: </h2> 
 
 <%= render "form", provider_detail: @provider_detail %>
 
+<p class="notice">
+<%= notice %>
+</p>
+
 <br>
+
+<h2 class="description"> Provider Details: </h2> 
 
 <div class="details-table">
 

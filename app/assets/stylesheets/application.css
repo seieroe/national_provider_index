@@ -1,13 +1,9 @@
-/* <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> */
-/* <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> */
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
 
 html {
-
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro';
     font-weight: bold;
     background-color: #0D2837;
     color: white;
@@ -15,43 +11,46 @@ html {
 
 .title {
     font-size: 4em;
+    margin: 8px 40px ;
 }
 
 .description {
-    font-family: Source Sans Pro';
+    margin: 0 auto; 
+    text-align: center;
 }
 
 
 table, th, td {
 	border: 1px black solid;
-    width: 75%;
     text-align: center;
     background-color: white;
     color: black;
-    /* border-collapse: collapse; */
+    border-collapse: collapse;
+    align-items: center;
 }
 
 td {
-    width: 500px;
+    width: 20px;
+    padding: 6px;
 }
 
 tr {
-    height: 50px;
+    padding: 10px;
 }
 
 table {
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 8px 8px 8px;
 }
 
 th {
     font-size: 1.6em;
-    height: 75px;
+    height: 40px;
     color: #6A718A;
 }
 
 form { 
-    display: flex;
     text-align: center;
 }
 
@@ -62,31 +61,30 @@ form {
 }
 
 input[type=text] {
-    /* width: 100%; */
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
-    /* box-sizing: border-box; */
-  }
-
-.submit-button {
-    display: flex; 
-    padding: 12px 20px;
-    margin: 8px 0; 
-    background-color: #91BB39; 
 }
 
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+.notice{
+  color: #91BB39
+}
+
+.submit_button {
+    font-size: 1.6em;
+    font-weight: bold;
+    width: 20%; 
+    padding: 12px 20px;
+    margin: 0 auto; 
+    background-color: #91BB39; 
+    text-align: center;
+    align-items: center;
+    color: white;
+    border-radius: 25px;
+    border: none;
+}
+
+.submit_button:hover {
+    background-color: #3B85B9; 
+    cursor: pointer;
+} 

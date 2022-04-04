@@ -27,7 +27,6 @@ class ProviderDetailsController < ApplicationController
     api_response = Faraday.get "https://npiregistry.cms.hhs.gov/api/?version=2.0&number=#{params['provider_detail']['npi']}"
     
     if api_response.status == 503
-      # raise api_response.status.inspect
       flash[:notice] = 'Sorry, the API is down right now!'
       redirect_to index
       return
