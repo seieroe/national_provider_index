@@ -23,21 +23,30 @@ class ProviderDetailsController < ApplicationController
 
   # POST /provider_details or /provider_details.json
   def create
+
     api_response = Faraday.get "https://npiregistry.cms.hhs.gov/api/?version=2.0&number=#{params['provider_detail']['npi']}"
     
-    parsed_api_response = JSON.parse api_response.body
-    if parsed_api_response['results'].nil?
-      # redirect_to index, flash: { error: "Not a valid NPI" }
-      flash[:notice] = 'Not a valid NPI'
+    if api_response.status == 503
+      # raise api_response.status.inspect
+      flash[:notice] = 'Sorry, the API is down right now!'
       redirect_to index
       return
-    else
-      @npi = parsed_api_response['results'][0]['number']
-      @name = parsed_api_response['results'][0]['basic']['name']
-      @address = parsed_api_response['results'][0]['addresses'][0]['address_1'] + " " + parsed_api_response['results'][0]['addresses'][0]['address_2'] + " " + parsed_api_response['results'][0]['addresses'][0]['city'] + " " + parsed_api_response['results'][0]['addresses'][0]['state'] + " " + parsed_api_response['results'][0]['addresses'][0]['postal_code']
-      @provider_type = parsed_api_response['results'][0]['enumeration_type']
-      @taxonomy = parsed_api_response['results'][0]['taxonomies'][0]['desc']
     end
+    
+    parsed_api_response = JSON.parse api_response.body
+
+    if parsed_api_response['results'].nil?
+      flash[:notice] = 'NOT A VALID NPI'
+      redirect_to index
+      return
+    end
+    
+    
+    @npi = parsed_api_response['results'][0]['number']
+    @name = parsed_api_response['results'][0]['basic']['name']
+    @address = parsed_api_response['results'][0]['addresses'][0]['address_1'] + " " + parsed_api_response['results'][0]['addresses'][0]['address_2'] + " " + parsed_api_response['results'][0]['addresses'][0]['city'] + " " + parsed_api_response['results'][0]['addresses'][0]['state'] + " " + parsed_api_response['results'][0]['addresses'][0]['postal_code']
+    @provider_type = parsed_api_response['results'][0]['enumeration_type']
+    @taxonomy = parsed_api_response['results'][0]['taxonomies'][0]['desc']
     if ProviderDetail.where(npi: params['provider_detail']['npi']).present?
       existing_record = ProviderDetail.where(npi: params['provider_detail']['npi'])
       @provider_detail = existing_record.update(existing_record[0]['id'], name: @name, 'npi': @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
@@ -46,7 +55,7 @@ class ProviderDetailsController < ApplicationController
       @provider_detail = ProviderDetail.create(name: @name, npi: @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
     end
     redirect_to '/index'
-    # raise parsed_api_response['results'].inspect
+    # raise api_response.status.inspect
     
   end
 
