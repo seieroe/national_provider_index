@@ -17,6 +17,9 @@ Necessary steps to get the application up and running:
 5) start your rails server
 `rails s`
 
+6) navigate to the app in your browser
+`http://localhost:3000/provider_details/`
+
 
 Things you may need to know:
 
