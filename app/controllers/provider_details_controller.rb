@@ -33,19 +33,20 @@ class ProviderDetailsController < ApplicationController
     end
     
     parsed_api_response = JSON.parse api_response.body
-
+    
     if parsed_api_response['results'].nil?
       flash[:notice] = 'NOT A VALID NPI'
       redirect_to index
       return
     end
     
+    details_from_api = parsed_api_response['results'][0]
     
-    @npi = parsed_api_response['results'][0]['number']
-    @name = parsed_api_response['results'][0]['basic']['name']
-    @address = parsed_api_response['results'][0]['addresses'][0]['address_1'] + " " + parsed_api_response['results'][0]['addresses'][0]['address_2'] + " " + parsed_api_response['results'][0]['addresses'][0]['city'] + " " + parsed_api_response['results'][0]['addresses'][0]['state'] + " " + parsed_api_response['results'][0]['addresses'][0]['postal_code']
-    @provider_type = parsed_api_response['results'][0]['enumeration_type']
-    @taxonomy = parsed_api_response['results'][0]['taxonomies'][0]['desc']
+    @npi = details_from_api['number']
+    @name = details_from_api['basic']['name']
+    @address = details_from_api['addresses'][0]['address_1'] + " " + details_from_api['addresses'][0]['address_2'] + " " + details_from_api['addresses'][0]['city'] + " " + details_from_api['addresses'][0]['state'] + " " + details_from_api['addresses'][0]['postal_code']
+    @provider_type = details_from_api['enumeration_type']
+    @taxonomy = details_from_api['taxonomies'][0]['desc']
     if ProviderDetail.where(npi: params['provider_detail']['npi']).present?
       existing_record = ProviderDetail.where(npi: params['provider_detail']['npi'])
       @provider_detail = existing_record.update(existing_record[0]['id'], name: @name, 'npi': @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
