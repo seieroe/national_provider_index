@@ -47,10 +47,10 @@ class ProviderDetailsController < ApplicationController
     @address = details_from_api['addresses'][0]['address_1'] + " " + details_from_api['addresses'][0]['address_2'] + " " + details_from_api['addresses'][0]['city'] + " " + details_from_api['addresses'][0]['state'] + " " + details_from_api['addresses'][0]['postal_code']
     @provider_type = details_from_api['enumeration_type']
     @taxonomy = details_from_api['taxonomies'][0]['desc']
-    if ProviderDetail.where(npi: params['provider_detail']['npi']).present?
-      existing_record = ProviderDetail.where(npi: params['provider_detail']['npi'])
-      @provider_detail = existing_record.update(existing_record[0]['id'], name: @name, 'npi': @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
-      @provider_detail.touch
+    existing_record = ProviderDetail.find_by(npi: params['provider_detail']['npi'])
+    if existing_record.present?
+      existing_record.update(name: @name, 'npi': @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
+      existing_record.touch
     else
       @provider_detail = ProviderDetail.create(name: @name, npi: @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
     end
