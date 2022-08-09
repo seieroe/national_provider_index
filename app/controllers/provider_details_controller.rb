@@ -54,7 +54,7 @@ class ProviderDetailsController < ApplicationController
     else
       @provider_detail = ProviderDetail.create(name: @name, npi: @npi, taxonomy: @taxonomy, provider_type: @provider_type, address: @address)
     end
-    redirect_to '/index'
+    redirect_to index
     # raise api_response.status.inspect
     
   end
